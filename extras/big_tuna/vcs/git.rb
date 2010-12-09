@@ -32,7 +32,8 @@ module BigTuna::VCS
 
     def clone(where_to)
       command = "git clone --depth 1 #{self.source} #{where_to} && cd #{where_to} && git checkout #{self.branch} && cd #{Rails.root}"
-      BigTuna::Runner.execute(Dir.pwd, command)
+      debug = BigTuna::Runner.execute(Dir.pwd, command)
+      puts debug.inspect
     end
   end
 end
