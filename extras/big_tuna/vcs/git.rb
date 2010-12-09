@@ -13,7 +13,7 @@ module BigTuna::VCS
       begin
         output = BigTuna::Runner.execute(self.source, command)
       rescue BigTuna::Runner::Error => e
-        raise VCS::Error.new("Couldn't access repository log")
+        raise BigTuna::VCS::Error.new(e.backtrace.join("\n"))
       end
       head_hash = output.stdout
       info[:commit] = head_hash.shift
@@ -25,7 +25,7 @@ module BigTuna::VCS
     end
 
     def clone(where_to)
-      command = "git clone --branch #{self.branch} --depth 1 #{self.source} #{where_to}"
+      command = "git clone --depth 1 #{self.source} #{where_to} && cd #{where_to} && git checkout #{self.branch} && cd #{Rails.root}"
       BigTuna::Runner.execute(Dir.pwd, command)
     end
   end
