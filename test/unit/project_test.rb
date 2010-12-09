@@ -8,7 +8,7 @@ class ProjectTest < ActiveSupport::TestCase
 
   def teardown
     FileUtils.rm_rf("test/files/repo")
-    FileUtils.rm_rf("builds/project")
+    FileUtils.rm_rf("tmp/project")
     super
   end
 
@@ -70,7 +70,7 @@ class ProjectTest < ActiveSupport::TestCase
     job = project.build!
     job.invoke_job
     assert File.exist?(project.build_dir)
-    assert_difference("Dir[File.join('builds', '*')].size", -1) do
+    assert_difference("Dir[File.join('tmp', '*')].size", -1) do
       project.destroy
     end
     assert ! File.exist?(project.build_dir)
