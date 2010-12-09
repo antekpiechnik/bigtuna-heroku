@@ -121,8 +121,8 @@ class Build < ActiveRecord::Base
   end
 
   def format_step_command(cmd)
-    new_cmd = cmd.gsub("%build_dir%", self.build_dir)
-    new_cmd.gsub!("%project_dir%", self.project.build_dir)
+    new_cmd = cmd.gsub("%build_dir%",  File.join(Rails.root, self.build_dir))
+    new_cmd.gsub!("%project_dir%", File.join(Rails.root, self.project.build_dir))
     comment_at = new_cmd.index("#")
     new_cmd = new_cmd[0...comment_at] unless comment_at.nil?
     new_cmd.strip!
