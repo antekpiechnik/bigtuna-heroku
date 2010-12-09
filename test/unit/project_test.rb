@@ -112,8 +112,8 @@ class ProjectTest < ActiveSupport::TestCase
       new_dir = project.send(:build_dir_from_name, project.name)
       assert File.directory?(new_dir)
     ensure
-      FileUtils.rm_rf("builds/my_name")
-      FileUtils.rm_rf("builds/my_other_name")
+      FileUtils.rm_rf("tmp/my_name")
+      FileUtils.rm_rf("tmp/my_other_name")
     end
   end
 

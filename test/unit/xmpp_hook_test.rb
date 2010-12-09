@@ -8,7 +8,7 @@ class XmppHookTest < ActiveSupport::TestCase
 
   def teardown
     FileUtils.rm_rf("test/files/koss")
-    FileUtils.rm_rf("builds/koss")
+    FileUtils.rm_rf("tmp/koss")
     super
   end
 

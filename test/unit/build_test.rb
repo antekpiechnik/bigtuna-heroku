@@ -8,7 +8,7 @@ class BuildTest < ActiveSupport::TestCase
 
   def teardown
     FileUtils.rm_rf("test/files/koss")
-    FileUtils.rm_rf("builds/koss")
+    FileUtils.rm_rf("tmp/koss")
     super
   end
 
@@ -24,7 +24,7 @@ class BuildTest < ActiveSupport::TestCase
   end
 
   test "special variable %build_dir% is available in steps" do
-    project = Project.make(:steps => "ls -al file\nls %build_dir%", :name => "Koss", :vcs_source => "test/files/koss", :vcs_type => "git", :max_builds => 1)
+    project = Project.make(:steps => "ls -al file\necho $PWD\nls %build_dir%", :name => "Koss", :vcs_source => "test/files/koss", :vcs_type => "git", :max_builds => 1)
     job = project.build!
     job.invoke_job
     build = project.recent_build

@@ -8,7 +8,7 @@ class ProjectsTest < ActionController::IntegrationTest
 
   def teardown
     FileUtils.rm_rf("test/files/repo")
-    FileUtils.rm_rf("builds/*")
+    FileUtils.rm_rf("tmp/*")
     super
   end
 
