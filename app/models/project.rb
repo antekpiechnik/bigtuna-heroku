@@ -83,7 +83,7 @@ class Project < ActiveRecord::Base
 
   private
   def build_dir_from_name(name)
-    File.join(Rails.root, "builds", name.downcase.gsub(/[^A-Za-z0-9]/, "_"))
+    File.join(Rails.root, "tmp", name.downcase.gsub(/[^A-Za-z0-9]/, "_"))
   end
 
   def remove_build_folder
